@@ -199,35 +199,20 @@ print("b2 = " + str(parameters["b2"]))
 
 
 
-def nn_model(X, Y, n_h, num_iterations = 10000, print_cost=False):
-    
-    
+def nn_model(X, Y, n_h, num_iterations = 10000, print_cost=False):   
     np.random.seed(3)
     n_x = layer_sizes(X, Y)[0]
-    n_y = layer_sizes(X, Y)[2]
-    
-    
+    n_y = layer_sizes(X, Y)[2]    
     parameters = initialize_parameters(n_x, n_h, n_y)
     
-
     for i in range(0, num_iterations):
-         
         A2, cache = forward_propagation(X, parameters)
-
         cost = compute_cost(A2, Y, parameters)
- 
-        
         grads = backward_propagation(parameters, cache, X, Y)
- 
-        
         parameters = update_parameters(parameters, grads)
-
         if print_cost and i % 1000 == 0:
             print ("Cost after iteration %i: %f" %(i, cost))
-
     return parameters
-
-
 
 X_assess, Y_assess = nn_model_test_case()
 parameters = nn_model(X_assess, Y_assess, 4, num_iterations=10000, print_cost=True)
@@ -236,23 +221,16 @@ print("b1 = " + str(parameters["b1"]))
 print("W2 = " + str(parameters["W2"]))
 print("b2 = " + str(parameters["b2"]))
 
-
-
 def predict(parameters, X):
    
     A2, cache = forward_propagation(X, parameters)
     predictions = (A2 > 0.5)
-  
     return predictions
-
-
 
 parameters, X_assess = predict_test_case()
 
 predictions = predict(parameters, X_assess)
 print("predictions mean = " + str(np.mean(predictions)))
-
-
 parameters = nn_model(X, Y, n_h = 4, num_iterations = 10000, print_cost=True)
 
 
